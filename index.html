@@ -169,7 +169,15 @@ hr{border:0;border-top:1px solid #e4edf8;margin:18px 0}
     const btn = e.submitter;
     btn.disabled = true;
     try {
-      await invoke("submit_confession",{content});
+      const { error } = await supabase
+  .from("suggestions")
+  .insert([{ content }]);
+
+if (error) throw error;const { error } = await supabase
+  .from("suggestions")
+  .insert([{ content }]);
+
+if (error) throw error;
       $("confessionText").value = "";
       $("confessionCount").textContent = "0/3000";
       notice("Đã gửi confession! Bài sẽ xuất hiện sau khi admin duyệt 🩵");
