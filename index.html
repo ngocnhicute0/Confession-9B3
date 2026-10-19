@@ -170,10 +170,12 @@ hr{border:0;border-top:1px solid #e4edf8;margin:18px 0}
     btn.disabled = true;
     try {
   const { error } = await db
-  .from("suggestions")
+  
+  .from("confessions")
   .insert([{ content }]);
 
 if (error) throw error;
+      
       $("confessionText").value = "";
       $("confessionCount").textContent = "0/3000";
       notice("Đã gửi confession! Bài sẽ xuất hiện sau khi admin duyệt 🩵");
