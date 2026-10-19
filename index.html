@@ -169,11 +169,7 @@ hr{border:0;border-top:1px solid #e4edf8;margin:18px 0}
     const btn = e.submitter;
     btn.disabled = true;
     try {
-      const { error } = await supabase
-  .from("suggestions")
-  .insert([{ content }]);
-
-if (error) throw error;const { error } = await supabase
+  const { error } = await db
   .from("suggestions")
   .insert([{ content }]);
 
@@ -208,7 +204,7 @@ if (error) throw error;
       postsCache = data.posts || [];
       renderPosts();
     } catch(err) {
-      $("posts").innerHTML = '<div class="card">Chưa tải được bài viết. Hãy kiểm tra cấu hình Supabase và Edge Function.</div>';
+      $("posts").innerHTML = '<div class="card">Chưa có bài viết nào cả,bạn mở đầu đi được hông??.</div>';
       notice("Lỗi tải bài: " + err.message, true);
     }
   }
@@ -270,7 +266,7 @@ if (error) throw error;
     try {
       await invoke("add_comment",{confession_id:form.dataset.commentForm,content});
       input.value = "";
-      notice("Đã gửi bình luận 🩵");
+      notice("Đã gửi bình luận ");
       await loadPosts();
     } catch(err) { notice("Chưa gửi được bình luận: "+err.message,true); }
     finally { btn.disabled = false; }
