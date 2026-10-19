@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CONFESSION 9B3 🩵</title>
+<meta name="theme-color" content="#dceeff">
+<style>
+:root{--blue:#6e9fd4;--pale:#eff7ff;--ink:#30445e;--pink:#fff0f5}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(150deg,#e5f3ff,#fff7fb);color:var(--ink);font-family:Arial,sans-serif;min-height:100vh}
+header{text-align:center;padding:36px 16px 26px;background:#ffffffa6;border-bottom:1px solid #d7e7f7}
+h1{margin:0;color:#4e83bd;font-size:clamp(28px,6vw,43px);letter-spacing:2px}
+header p{margin:12px 0 0;line-height:1.6}
+.wrap{width:min(760px,92%);margin:24px auto 60px}
+.card{background:#ffffffed;border:1px solid #dceafb;border-radius:20px;padding:20px;margin-bottom:18px;box-shadow:0 6px 22px #7499bf12}
+h2{font-size:20px;margin:0 0 14px;color:#507eaf}
+input,textarea,button{font:inherit}
+textarea,input{width:100%;padding:13px 14px;border:1px solid #d4e3f4;border-radius:12px;background:#fbfdff;color:var(--ink);outline-color:#8db7e6}
+textarea{resize:vertical;min-height:100px}
+button{border:0;border-radius:12px;padding:11px 16px;background:#76a6da;color:white;font-weight:700;cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
+button.secondary{background:#edf5ff;color:#4d78a7}
+button.danger{background:#ffe9ed;color:#a34c62}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.muted{color:#8394a8;font-size:13px}
+.post{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;margin:12px 0}
+.pinned{border:2px solid #a8c9f0;background:#fafdff}
+.tag{display:inline-block;background:#eaf4ff;color:#4d7eaf;border-radius:20px;padding:5px 9px;font-size:12px}
+.comments{border-top:1px solid #e7eef8;margin-top:14px;padding-top:12px}
+.comment{padding:9px 11px;margin:7px 0;background:#f5f9ff;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.comment-form{display:flex;gap:8px;margin-top:9px}
+.comment-form input{min-width:0}
+.comment-form button{white-space:nowrap}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#notice{margin-bottom:14px}
+footer{text-align:center;padding:24px;color:#8394a8;font-size:13px}
+hr{border:0;border-top:1px solid #e4edf8;margin:18px 0}
+[hidden]{display:none!important}
+@media(max-width:480px){.card{padding:15px}.comment-form{flex-direction:column}.comment-form button{width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <h1>CONFESSION 9B3 🩵</h1>
+  <p>Gửi đôi lời giấu kín — lưu giữ những kỷ niệm thanh xuân ✨<br>
+  <span class="muted">Hãy tử tế và tôn trọng nhau nha!</span></p>
+</header>
+
+<main class="wrap">
+  <div id="notice" class="muted" role="status"></div>
+
+  <section class="card">
+    <h2>💌 Gửi confession</h2>
+    <form id="confessionForm">
+      <textarea id="confessionText" maxlength="3000" required
+        placeholder="Điều bạn muốn gửi gắm đến 9B3..."></textarea>
+      <div class="row muted" style="margin-top:8px">
+        <span>Không cần ghi tên nếu muốn ẩn danh.</span>
+        <span id="confessionCount">0/3000</span>
+      </div>
+      <div class="actions"><button type="submit">Gửi confession 🩵</button></div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>🌷 Góp ý cho trang</h2>
+    <form id="suggestionForm">
+      <textarea id="suggestionText" maxlength="2000" required
+        placeholder="Bạn muốn góp ý điều gì?"></textarea>
+      <div class="actions"><button type="submit">Gửi góp ý</button></div>
+    </form>
+  </section>
+
+  <section>
+    <div class="row" style="margin:22px 3px">
+      <h2 style="margin:0">📮 Góc confession</h2>
+      <button id="refreshBtn" class="secondary" type="button">↻ Làm mới</button>
+    </div>
+    <div id="posts"><div class="card">Đang tải confession...</div></div>
+  </section>
+
+  <section class="card">
+    <div class="row">
+      <div>
+        <h2 style="margin-bottom:5px">🔐 Khu vực admin</h2>
+        <div class="muted">Chỉ dành cho tài khoản quản trị.</div>
+      </div>
+      <button id="adminToggle" class="secondary" type="button">Đăng nhập</button>
+    </div>
+    <div id="loginPanel" hidden>
+      <hr>
+      <form id="loginForm">
+        <label for="adminEmail">Email admin</label>
+        <input id="adminEmail" type="email" autocomplete="username" required style="margin:7px 0 12px">
+        <label for="adminPassword">Mật khẩu</label>
+        <input id="adminPassword" type="password" autocomplete="current-password" required style="margin:7px 0 12px">
+        <div class="actions"><button type="submit">Đăng nhập</button></div>
+      </form>
+    </div>
+    <div id="adminPanel" hidden>
+      <hr>
+      <div class="row">
+        <strong>Quản trị bài viết</strong>
+        <button id="logoutBtn" class="secondary" type="button">Đăng xuất</button>
+      </div>
+      <div id="adminPosts" style="margin-top:14px"></div>
+      <hr>
+      <h2>Bình luận</h2>
+      <div id="adminComments"></div>
+    </div>
+  </section>
+</main>
+<footer>Made with 🩵 by 9B3 · Hãy cùng tạo nên kỷ niệm đẹp!</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  const SUPABASE_URL = "https://dztliaerldmqagsakdxr.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_NOgdkB5Fc-2zskMNaudlYQ_OhuEy76g";
+
+  const $ = id => document.getElementById(id);
+  const notice = (msg, error=false) => {
+    $("notice").textContent = msg;
+    $("notice").style.color = error ? "#b44c63" : "#507eaf";
+  };
+
+  if (SUPABASE_URL.includes("YOUR_") || SUPABASE_PUBLISHABLE_KEY.includes("YOUR_")) {
+    notice("Bạn cần điền Project URL và Publishable key của Supabase trước khi sử dụng.", true);
+    $("posts").innerHTML = '<div class="card">Website đang chờ cấu hình Supabase.</div>';
+    return;
+  }
+
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, c =>
+    ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const dateText = value => {
+    const d = new Date(value);
+    return Number.isNaN(d.getTime()) ? "" : d.toLocaleString("vi-VN");
+  };
+  const invoke = async (action, data={}) => {
+    const {data: result,error} = await db.functions.invoke("confession-api", {
+      body:{action,...data}
+    });
+    if(error) throw error;
+    if(result?.error) throw new Error(result.error);
+    return result;
+  };
+  const getVoterToken = () => {
+    let token = localStorage.getItem("cfs9b3-voter");
+    if(!token) {
+      token = crypto.randomUUID();
+      localStorage.setItem("cfs9b3-voter", token);
+    }
+    return token;
+  };
+  let postsCache = [];
+  let adminOpen = false;
+
+  $("confessionText").addEventListener("input", () => {
+    $("confessionCount").textContent = $("confessionText").value.length + "/3000";
+  });
+
+  $("confessionForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const content = $("confessionText").value.trim();
+    if(!content) return;
+    const btn = e.submitter;
+    btn.disabled = true;
+    try {
+      await invoke("submit_confession",{content});
+      $("confessionText").value = "";
+      $("confessionCount").textContent = "0/3000";
+      notice("Đã gửi confession! Bài sẽ xuất hiện sau khi admin duyệt 🩵");
+    } catch(err) {
+      notice("Chưa gửi được: " + err.message, true);
+    } finally { btn.disabled = false; }
+  });
+
+  $("suggestionForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const content = $("suggestionText").value.trim();
+    if(!content) return;
+    const btn = e.submitter;
+    btn.disabled = true;
+    try {
+      await invoke("submit_suggestion",{content});
+      $("suggestionText").value = "";
+      notice("Cảm ơn bạn! Góp ý đã được gửi 🩵");
+    } catch(err) {
+      notice("Chưa gửi được góp ý: " + err.message, true);
+    } finally { btn.disabled = false; }
+  });
+
+  async function loadPosts() {
+    $("posts").innerHTML = '<div class="card">Đang tải bài viết...</div>';
+    try {
+      const data = await invoke("list_public");
+      postsCache = data.posts || [];
+      renderPosts();
+    } catch(err) {
+      $("posts").innerHTML = '<div class="card">Chưa tải được bài viết. Hãy kiểm tra cấu hình Supabase và Edge Function.</div>';
+      notice("Lỗi tải bài: " + err.message, true);
+    }
+  }
+
+  function renderPosts() {
+    const posts = [...postsCache].sort((a,b) =>
+      Number(Boolean(b.is_pinned))-Number(Boolean(a.is_pinned)) ||
+      new Date(b.created_at)-new Date(a.created_at)
+    );
+    if(!posts.length) {
+      $("posts").innerHTML = '<div class="card">Chưa có confession nào được duyệt. Hãy là người đầu tiên nha! 🌷</div>';
+      return;
+    }
+    $("posts").innerHTML = posts.map(p => {
+      const comments = (p.comments || []).map(c => `
+        <div class="comment">${escapeHTML(c.content)}
+          <div class="muted" style="margin-top:5px">${escapeHTML(dateText(c.created_at))}</div>
+        </div>`).join("");
+      return `<article class="card ${p.is_pinned ? "pinned":""}">
+        ${p.is_pinned ? '<div class="tag">📌 Được ghim bởi admin</div>' : ""}
+        <div class="muted" style="margin-top:8px">${escapeHTML(dateText(p.created_at))}</div>
+        <div class="post">${escapeHTML(p.content)}</div>
+        <div class="actions">
+          <button class="secondary" data-like="${escapeHTML(p.id)}" type="button">🤍 Thích (${Number(p.like_count)||0})</button>
+        </div>
+        <div class="comments">
+          <strong>💬 Bình luận (${(p.comments||[]).length})</strong>
+          ${comments}
+          <form class="comment-form" data-comment-form="${escapeHTML(p.id)}">
+            <input name="content" maxlength="500" required placeholder="Viết bình luận tử tế nha...">
+            <button type="submit">Gửi</button>
+          </form>
+        </div>
+      </article>`;
+    }).join("");
+  }
+
+  $("posts").addEventListener("click", async e => {
+    const btn = e.target.closest("[data-like]");
+    if(!btn) return;
+    btn.disabled = true;
+    try {
+      const result = await invoke("like",{confession_id:btn.dataset.like,voter_token:getVoterToken()});
+      notice(result.already_liked ? "Bạn đã thích bài này trên trình duyệt này rồi 🩵" : "Đã thả tim 🩵");
+      await loadPosts();
+    } catch(err) { notice("Chưa thích được: "+err.message,true); }
+    finally { btn.disabled = false; }
+  });
+
+  $("posts").addEventListener("submit", async e => {
+    const form = e.target.closest("[data-comment-form]");
+    if(!form) return;
+    e.preventDefault();
+    const input = form.elements.content;
+    const content = input.value.trim();
+    if(!content) return;
+    const btn = form.querySelector("button");
+    btn.disabled = true;
+    try {
+      await invoke("add_comment",{confession_id:form.dataset.commentForm,content});
+      input.value = "";
+      notice("Đã gửi bình luận 🩵");
+      await loadPosts();
+    } catch(err) { notice("Chưa gửi được bình luận: "+err.message,true); }
+    finally { btn.disabled = false; }
+  });
+
+  $("refreshBtn").addEventListener("click",loadPosts);
+  $("adminToggle").addEventListener("click",async () => {
+    $("loginPanel").hidden = !$("loginPanel").hidden;
+  });
+
+  $("loginForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = e.submitter;
+    btn.disabled = true;
+    try {
+      const {error} = await db.auth.signInWithPassword({
+        email:$("adminEmail").value.trim(),
+        password:$("adminPassword").value
+      });
+      if(error) throw error;
+      await loadAdmin();
+    } catch(err) { notice("Đăng nhập chưa thành công: "+err.message,true); }
+    finally { btn.disabled = false; }
+  });
+
+  $("logoutBtn").addEventListener("click",async () => {
+    await db.auth.signOut();
+    $("adminPanel").hidden = true;
+    $("loginPanel").hidden = true;
+    $("adminToggle").hidden = false;
+    notice("Đã đăng xuất.");
+  });
+
+  async function loadAdmin() {
+    try {
+      const data = await invoke("admin_overview");
+      $("loginPanel").hidden = true;
+      $("adminPanel").hidden = false;
+      $("adminToggle").hidden = true;
+      adminOpen = true;
+      renderAdmin(data);
+      notice("Đăng nhập admin thành công 🩵");
+    } catch(err) {
+      await db.auth.signOut();
+      notice("Tài khoản này không có quyền admin: "+err.message,true);
+    }
+  }
+
+  function renderAdmin(data) {
+    const pending = data.confessions || [];
+    $("adminPosts").innerHTML = pending.length ? pending.map(p => `
+      <div class="comment">
+        <div class="muted">${escapeHTML(p.status)} · ${escapeHTML(dateText(p.created_at))}</div>
+        <div class="post">${escapeHTML(p.content)}</div>
+        <div class="actions">
+          ${p.status!=="approved" ? `<button data-admin="approve" data-id="${escapeHTML(p.id)}">Duyệt</button>`:""}
+          ${p.status!=="rejected" ? `<button class="secondary" data-admin="reject" data-id="${escapeHTML(p.id)}">Từ chối</button>`:""}
+          <button class="secondary" data-admin="pin" data-id="${escapeHTML(p.id)}" data-pinned="${p.is_pinned ? "1":"0"}">${p.is_pinned ? "Bỏ ghim":"📌 Ghim"}</button>
+          <button class="danger" data-admin="delete" data-id="${escapeHTML(p.id)}">Xóa</button>
+        </div>
+      </div>`).join("") : '<p class="muted">Chưa có bài viết.</p>';
+
+    const comments = data.comments || [];
+    $("adminComments").innerHTML = comments.length ? comments.map(c => `
+      <div class="comment">
+        <div class="muted">${escapeHTML(c.status)} · ${escapeHTML(c.confession_id)}</div>
+        <div>${escapeHTML(c.content)}</div>
+        <div class="actions">
+          ${c.status==="hidden" ? `<button data-comment-admin="visible" data-id="${escapeHTML(c.id)}">Hiện lại</button>` : `<button class="secondary" data-comment-admin="hidden" data-id="${escapeHTML(c.id)}">Ẩn bình luận</button>`}
+        </div>
+      </div>`).join("") : '<p class="muted">Chưa có bình luận.</p>';
+  }
+
+  $("adminPosts").addEventListener("click",async e => {
+    const btn = e.target.closest("[data-admin]");
+    if(!btn) return;
+    const action = btn.dataset.admin;
+    if(action==="delete" && !confirm("Bạn chắc chắn muốn xóa bài này?")) return;
+    btn.disabled = true;
+    try {
+      const payload = {id:btn.dataset.id};
+      if(action==="pin") payload.is_pinned = btn.dataset.pinned !== "1";
+      await invoke("admin_confession",{operation:action,...payload});
+      notice("Đã cập nhật bài viết.");
+      await loadPosts();
+      await loadAdmin();
+    } catch(err) { notice("Không thực hiện được: "+err.message,true); }
+    finally { btn.disabled = false; }
+  });
+
+  $("adminComments").addEventListener("click",async e => {
+    const btn = e.target.closest("[data-comment-admin]");
+    if(!btn) return;
+    btn.disabled = true;
+    try {
+      await invoke("admin_comment",{id:btn.dataset.id,status:btn.dataset.commentAdmin});
+      notice("Đã cập nhật bình luận.");
+      await loadPosts();
+      await loadAdmin();
+    } catch(err) { notice("Không cập nhật được: "+err.message,true); }
+    finally { btn.disabled = false; }
+  });
+
+  db.auth.getSession().then(({data}) => {
+    if(data.session) loadAdmin();
+  });
+  loadPosts();
+})();
+</script>
+</body>
+</html>
