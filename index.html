@@ -140,7 +140,7 @@ hr{border:0;border-top:1px solid #e4edf8;margin:18px 0}
     return Number.isNaN(d.getTime()) ? "" : d.toLocaleString("vi-VN");
   };
   const invoke = async (action, data={}) => {
-    const {data: result,error} = await db.functions.invoke("confession-api", {
+    const {data: result,error} = await db.functions.invoke("confession-ap", {
       body:{action,...data}
     });
     if(error) throw error;
