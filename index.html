@@ -181,7 +181,7 @@ if (error) throw error;
       
       $("confessionText").value = "";
       $("confessionCount").textContent = "0/3000";
-      notice("Đã gửi confession! Bài sẽ xuất hiện sau khi admin duyệt 🩵");
+      notice("Đã gửi confession! Bài sẽ xuất hiện ");
     } catch(err) {
       notice("Chưa gửi được: " + err.message, true);
     } finally { btn.disabled = false; }
@@ -220,7 +220,7 @@ if (error) throw error;
       new Date(b.created_at)-new Date(a.created_at)
     );
     if(!posts.length) {
-      $("posts").innerHTML = '<div class="card">Chưa có confession nào được duyệt. Hãy là người đầu tiên nha! 🌷</div>';
+     $("posts").innerHTML = '<div class="card">Chưa có confession nào cả huhu </div>';
       return;
     }
     $("posts").innerHTML = posts.map(p => {
@@ -327,8 +327,6 @@ if (error) throw error;
         <div class="muted">${escapeHTML(p.status)} · ${escapeHTML(dateText(p.created_at))}</div>
         <div class="post">${escapeHTML(p.content)}</div>
         <div class="actions">
-          ${p.status!=="approved" ? `<button data-admin="approve" data-id="${escapeHTML(p.id)}">Duyệt</button>`:""}
-          ${p.status!=="rejected" ? `<button class="secondary" data-admin="reject" data-id="${escapeHTML(p.id)}">Từ chối</button>`:""}
           <button class="secondary" data-admin="pin" data-id="${escapeHTML(p.id)}" data-pinned="${p.is_pinned ? "1":"0"}">${p.is_pinned ? "Bỏ ghim":"📌 Ghim"}</button>
           <button class="danger" data-admin="delete" data-id="${escapeHTML(p.id)}">Xóa</button>
         </div>
